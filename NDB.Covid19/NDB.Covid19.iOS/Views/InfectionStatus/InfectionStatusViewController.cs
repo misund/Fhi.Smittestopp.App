@@ -27,13 +27,21 @@ namespace NDB.Covid19.iOS.Views.InfectionStatus
             return vc;
         }
 
+        public static UINavigationController GetInfectionSatusPageControllerInNavigationController()
+        {
+            UIViewController vc = InfectionStatusViewController.Create(false);
+            UINavigationController navigationController = new UINavigationController(vc);
+            navigationController.SetNavigationBarHidden(true, false);
+            navigationController.ModalPresentationStyle = UIModalPresentationStyle.FullScreen;
+            return navigationController;
+        }
+
         bool _comingFromOnboarding;
 
         InfectionStatusViewModel _viewModel;
 
         UIButton _messageViewBtn;
         UIButton _areYouInfectedBtn;
-        PulseAnimationView _pulseAnimationView;
 
         IOSPermissionManager _permissionManager;
 
@@ -44,17 +52,24 @@ namespace NDB.Covid19.iOS.Views.InfectionStatus
             SetupStyling();
             MessagingCenter.Subscribe<object>(this, MessagingCenterKeys.KEY_MESSAGE_STATUS_UPDATED, OnMessageStatusChanged);
             MessagingCenter.Subscribe<object>(this, MessagingCenterKeys.KEY_APP_RETURNS_FROM_BACKGROUND, OnAppReturnsFromBackground);
+            MessagingCenter.Subscribe<object>(this, MessagingCenterKeys.KEY_CONSENT_MODAL_IS_CLOSED, OnConsentModalIsClosed);
         }
 
         public override void ViewDidUnload()
         {
             MessagingCenter.Unsubscribe<object>(this, MessagingCenterKeys.KEY_MESSAGE_STATUS_UPDATED);
+            MessagingCenter.Unsubscribe<object>(this, MessagingCenterKeys.KEY_CONSENT_MODAL_IS_CLOSED);
             base.ViewDidUnload();
         }
 
         private void OnMessageStatusChanged(object _ = null)
         {
             InvokeOnMainThread(() => _viewModel.UpdateNotificationDot());
+        }
+
+        private void OnConsentModalIsClosed(object obj)
+        {
+            UpdateUI();
         }
         
         public override void ViewWillAppear(bool animated)
@@ -73,7 +88,6 @@ namespace NDB.Covid19.iOS.Views.InfectionStatus
                 StartIfStopped();
                 _comingFromOnboarding = false;
             }
-            _pulseAnimationView?.RestartAnimation();
         }
 
 
@@ -151,7 +165,19 @@ namespace NDB.Covid19.iOS.Views.InfectionStatus
         async void SetStatusContainerState(bool isRunning)
         {
             UIView statusBar = new UIView(UIApplication.SharedApplication.StatusBarFrame);
-            statusBar.BackgroundColor = isRunning ? ColorHelper.STATUS_ACTIVE : ColorHelper.STATUS_INACTIVE;
+            bool modalClosed = true;
+            if (ModalViewController != null)
+            {
+                modalClosed = ModalViewController.IsBeingDismissed;
+            }
+            if (NavigationController.TopViewController is InfectionStatusViewController && modalClosed)
+            {
+                statusBar.BackgroundColor = isRunning ? ColorHelper.STATUS_ACTIVE : ColorHelper.STATUS_INACTIVE;
+            }
+            else
+            {
+                statusBar.BackgroundColor = ColorHelper.DEFAULT_BACKGROUND_COLOR;
+            }
             UIApplication.SharedApplication.KeyWindow.AddSubview(statusBar);
 
             ScrollDownBackgroundView.BackgroundColor = isRunning ? ColorHelper.STATUS_ACTIVE : ColorHelper.STATUS_INACTIVE;

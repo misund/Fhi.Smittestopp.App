@@ -43,14 +43,16 @@ namespace NDB.Covid19.iOS.Views.Settings.SettingsPageGeneral
 
             InitLabel(RestartAppLabl, FontType.FontRegular,
                 SettingsGeneralViewModel.SETTINGS_GENERAL_RESTART_REQUIRED_TEXT, 14, 28);
-            InitLabel(SmittestopLinkButtionLbl, FontType.FontRegular,
+            InitUnderlinedLabel(SmittestopLinkButtonLbl, FontType.FontRegular,
                 SettingsGeneralViewModel.SETTINGS_GENERAL_MORE_INFO_BUTTON_TEXT, 16, 28);
+
+            Header.TextColor = ColorHelper.TEXT_COLOR_ON_BACKGROUND;
 
             //Implemented for correct voiceover due to Back button 
             BackButton.AccessibilityLabel = SettingsViewModel.SETTINGS_CHILD_PAGE_ACCESSIBILITY_BACK_BUTTON;
 
             //Implemented for correct voiceover due to last paragraph and link
-            SmittestopLinkButtionLbl.AccessibilityLabel =
+            SmittestopLinkButtonLbl.AccessibilityLabel =
                 SettingsGeneralViewModel.SETTINGS_GENERAL_ACCESSIBILITY_MORE_INFO_BUTTON_TEXT;
 
             //Implemented for correct voiceover due to smitte|stop, removing pronunciation of lodretstreg
@@ -87,7 +89,7 @@ namespace NDB.Covid19.iOS.Views.Settings.SettingsPageGeneral
         void SetupLinkButton()
         {
             _gestureRecognizer = new UITapGestureRecognizer();
-            _gestureRecognizer.AddTarget(() => OnSmittestopLinkButtionStackViewTapped(_gestureRecognizer));
+            _gestureRecognizer.AddTarget(() => OnSmittestopLinkButtonStackViewTapped(_gestureRecognizer));
             SmittestopLinkButtonStackView.AddGestureRecognizer(_gestureRecognizer);
         }
 
@@ -142,7 +144,7 @@ namespace NDB.Covid19.iOS.Views.Settings.SettingsPageGeneral
             }
         }
 
-        void OnSmittestopLinkButtionStackViewTapped(UITapGestureRecognizer recognizer)
+        void OnSmittestopLinkButtonStackViewTapped(UITapGestureRecognizer recognizer)
         {
             SettingsGeneralViewModel.OpenSmitteStopLink();
         }

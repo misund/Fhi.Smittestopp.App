@@ -46,8 +46,7 @@ namespace NDB.Covid19.Droid.Views.Messages
         protected override void OnDestroy()
         {
             MessagesViewModel.UnsubscribeMessages(this);
-            Task.Run(async () =>
-                await MessagesViewModel.MarkAllMessagesAsRead());
+            MessagesViewModel.MarkAllMessagesAsRead();
             base.OnDestroy();
         }
 
@@ -91,11 +90,21 @@ namespace NDB.Covid19.Droid.Views.Messages
             
             FindViewById<TextView>(Resource.Id.messages_page_title).Text =
                 MessagesViewModel.MESSAGES_HEADER;
-            
-            FindViewById<TextView>(Resource.Id.messages_page_sub_header).Text =
-                (await MessageUtils.GetAllUnreadMessages()).Count > 0 ?
-                    MessagesViewModel.MESSAGES_NEW_MESSAGES_HEADER :
-                    MessagesViewModel.MESSAGES_NO_ITEMS_TITLE;
+
+            string headerText = MessagesViewModel.MESSAGES_NO_ITEMS_TITLE;
+            int unreadMessages = (await MessageUtils.GetAllUnreadMessages()).Count;
+            int messages = (await MessageUtils.GetMessages()).Count;
+
+            if (unreadMessages > 0)
+            {
+                headerText = MessagesViewModel.MESSAGES_NEW_MESSAGES_HEADER;
+            }
+            else if (messages > 0)
+            {
+                headerText = MessagesViewModel.MESSAGES_NO_NEW_MESSAGES_HEADER;
+            }
+
+            FindViewById<TextView>(Resource.Id.messages_page_sub_header).Text = headerText;
 
             string lastUpdatedString = MessagesViewModel.LastUpdateString;
             if (lastUpdatedString == "")
@@ -120,20 +129,20 @@ namespace NDB.Covid19.Droid.Views.Messages
             ShowList(false);
         }
 
-        async Task HandleBeforeActivityClose()
+        void HandleBeforeActivityClose()
         {
-            await MessagesViewModel.MarkAllMessagesAsRead();
+            MessagesViewModel.MarkAllMessagesAsRead();
         }
 
-        public override async void OnBackPressed()
+        public override void OnBackPressed()
         {
-            await HandleBeforeActivityClose();
+            HandleBeforeActivityClose();
             base.OnBackPressed();
         }
 
-        private async void OnCloseBtnClicked(object arg1, EventArgs arg2)
+        private void OnCloseBtnClicked(object arg1, EventArgs arg2)
         {
-            await HandleBeforeActivityClose();
+            HandleBeforeActivityClose();
             Finish();
         }
 

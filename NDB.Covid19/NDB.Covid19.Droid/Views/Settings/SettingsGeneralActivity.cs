@@ -34,7 +34,7 @@ namespace NDB.Covid19.Droid.Views.Settings
 
         private void Init()
         {
-            Button backButton = FindViewById<Button>(Resource.Id.arrow_back_general);
+            ImageButton backButton = FindViewById<ImageButton>(Resource.Id.arrow_back_general);
             backButton.ContentDescription = SETTINGS_CHILD_PAGE_ACCESSIBILITY_BACK_BUTTON;
 
             TextView titleField = FindViewById<TextView>(Resource.Id.settings_general_title);
@@ -45,7 +45,6 @@ namespace NDB.Covid19.Droid.Views.Settings
             TextView languageHeader = FindViewById<TextView>(Resource.Id.settings_general_select_lang_header);
             TextView languageDesc = FindViewById<TextView>(Resource.Id.settings_general_select_lang_desc_one);
             TextView languageLink = FindViewById<TextView>(Resource.Id.settings_general_link);
-
             TextView linkLayout = FindViewById<TextView>(Resource.Id.settings_general_link);
 
             titleField.Text = SETTINGS_GENERAL_TITLE;
