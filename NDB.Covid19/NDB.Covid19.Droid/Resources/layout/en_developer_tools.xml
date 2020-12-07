@@ -19,7 +19,7 @@
                 android:id="@+id/enDeveloperTools_button_back"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/circle_arrow_left"
+                android:background="@drawable/ic_circle_arrow_left"
                 android:clickable="true"
                 android:focusable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -100,6 +100,30 @@
                         app:layout_constraintTop_toTopOf="parent"/>
 
                 <Button
+                        android:id="@+id/enDeveloperTools_button_showLastSummary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="Show Summary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                <Button
+                        android:id="@+id/enDeveloperTools_button_showLastExposureInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="Show ExposureInfos"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                <Button
                         android:id="@+id/enDeveloperTools_button_pushKeys"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -107,7 +131,7 @@
                         android:layout_marginBottom="1dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:text="Retrieve Last Key Sent Info"
+                        android:text="Retrieve Last Key Sent Information"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -174,7 +198,7 @@
                         android:layout_marginBottom="1dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:text="Last Used Exposure Configuration"
+                        android:text="Last Used Exp. Configuration"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -239,30 +263,6 @@
                         app:layout_constraintTop_toTopOf="parent"/>
 
                 <Button
-                        android:id="@+id/enDeveloperTools_button_showLastSummary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginBottom="1dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:text="Show last ExposureSummary"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
-
-                <Button
-                        android:id="@+id/enDeveloperTools_button_showLastExposureInfo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginBottom="1dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:text="Show last ExposureInfos"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
-
-                <Button
                         android:id="@+id/enDeveloperTools_button_resetLocalData"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -270,9 +270,23 @@
                         android:layout_marginBottom="1dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:text="Reset Local Data"
+                        android:text="Reset Device"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
+
+                <Button
+                        android:id="@+id/fake_gateway"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="1dp"
+                        android:text="Fake gateway"/>
+
+                <Button
+                        android:id="@+id/print_actual_preferences"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="1dp"
+                        android:text="Print Preferences"/>
 
                 <TextView
                         style="@style/PrimaryText"
@@ -339,20 +353,6 @@
                             android:layout_marginVertical="1dp"
                             android:text="All consents (NR)"/>
                 </LinearLayout>
-
-                <Button
-                        android:id="@+id/print_actual_preferences"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="1dp"
-                        android:text="Print Actual Preferences"/>
-
-                <Button
-                        android:id="@+id/fake_gateway"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="1dp"
-                        android:text="Fake gateway"/>
 
                 <Button
                         android:id="@+id/pull_with_delay"
