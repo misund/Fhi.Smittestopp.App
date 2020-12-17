@@ -51,7 +51,7 @@ namespace NDB.Covid19.Droid.OAuth2
                 // load redirect_url Page for parsing
                 AuthenticationState.Authenticator.OnPageLoading(uri_netfx);
 
-                Intent intent = new Intent(this, typeof(SpinnerPageActivity));
+                Intent intent = new Intent(this, typeof(QuestionnairePageActivity));
                 StartActivity(intent);
 
                 this.Finish();
