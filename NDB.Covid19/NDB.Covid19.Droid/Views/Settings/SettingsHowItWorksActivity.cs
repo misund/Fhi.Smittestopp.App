@@ -31,14 +31,22 @@ namespace NDB.Covid19.Droid.Views.Settings
             ImageButton backButton = FindViewById<ImageButton>(Resource.Id.arrow_back);
             backButton.ContentDescription = SettingsViewModel.SETTINGS_CHILD_PAGE_ACCESSIBILITY_BACK_BUTTON;
 
-            TextView textField = FindViewById<TextView>(Resource.Id.settings_how_it_works_text);
             TextView titleField = FindViewById<TextView>(Resource.Id.settings_how_it_works_title);
+            TextView textField = FindViewById<TextView>(Resource.Id.settings_how_it_works_text);
 
             titleField.Text = SettingsPage2ViewModel.SETTINGS_PAGE_2_HEADER;
-            textField.TextFormatted = HtmlCompat.FromHtml(SettingsPage2ViewModel.SETTINGS_PAGE_2_CONTENT,
+            textField.TextFormatted = HtmlCompat.FromHtml(SettingsPage2ViewModel.SETTINGS_PAGE_2_CONTENT_TEXT_INTRO,
                 HtmlCompat.FromHtmlModeLegacy);
             LinkUtil.LinkifyTextView(textField);
             FormatLink(textField);
+
+            //Active and inactive status
+            TextView header1 = FindViewById<TextView>(Resource.Id.settings_howitworks_activeinactive_header);
+            textField.TextFormatted = HtmlCompat.FromHtml(SettingsPage2ViewModel.SETTINGS_PAGE_2_CONTENT_TEXT_PARAGRAPH_1_TITLE,
+                HtmlCompat.FromHtmlModeLegacy);
+            TextView body1 = FindViewById<TextView>(Resource.Id.settings_howitworks_activeinactive_bodytext);
+            textField.TextFormatted = HtmlCompat.FromHtml(SettingsPage2ViewModel.SETTINGS_PAGE_2_CONTENT_TEXT_PARAGRAPH_1_CONTENT,
+                HtmlCompat.FromHtmlModeLegacy);
 
             backButton.Click += new SingleClick((sender, args) => Finish()).Run;
         }
