@@ -135,7 +135,6 @@ namespace NDB.Covid19.Droid.Views.AuthenticationFlow
                 Intent intent = new Intent(this, typeof(QuestionnairePageActivity));
                 StartActivity(intent);
             });
-
         }
 
         private void ShowSpinner(bool show)
